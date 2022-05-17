@@ -1,8 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.model.Customer;
-import com.codegym.service.CustomerServiceImpl;
-import sun.awt.image.ImageWatched;
+import com.codegym.service.impl.CustomerServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

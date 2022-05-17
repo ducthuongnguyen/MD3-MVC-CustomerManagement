@@ -7,5 +7,6 @@
 </head>
 <body>
 <a href="/customers">Customers List</a>
+<a href="/products">Products List</a>
 </body>
 </html>
