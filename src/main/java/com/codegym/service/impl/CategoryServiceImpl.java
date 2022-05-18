@@ -1,6 +1,7 @@
 package com.codegym.service.impl;
 
 import com.codegym.model.Category;
+import com.codegym.model.Product;
 import com.codegym.service.ICategoryService;
 
 import java.sql.*;
@@ -25,7 +26,19 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public List<Category> findAll() {
-        return null;
+        List<Category> categories = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from category;")) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+
+                categories.add(new Category(id,name));
+            }
+        } catch (SQLException e) {
+        }
+        return categories;
     }
 
     @Override
