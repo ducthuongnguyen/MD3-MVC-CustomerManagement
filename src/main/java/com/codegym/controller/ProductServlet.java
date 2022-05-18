@@ -25,15 +25,12 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null){
-            action="";
+        if (action == null) {
+            action = "";
         }
-        switch (action){
-            case "filterCategory":
-                filterByCategory(request,response);
-                break;
+        switch (action) {
             default:
-                showListProduct(request,response);
+                showListProduct(request, response);
         }
 
     }
@@ -43,7 +40,7 @@ public class ProductServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
         List<Product> products = productService.findAll();
         List<Product> searchList = new ArrayList<>();
-        for (Product p: products) {
+        for (Product p : products) {
             if (p.getCategoryId() == catId) {
                 searchList.add(p);
             }
@@ -58,10 +55,20 @@ public class ProductServlet extends HttpServlet {
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
-        List<Product> products = productService.findAll();
+        int catId = 0;
+        if (request.getParameter("id") != null) catId = Integer.parseInt(request.getParameter("id"));
+        List<Category> categories;
+        List<Product> products;
         List<Category> categories1 = categoryService.findAll();
-        List<Category> categories = findAllCategories(products);
+        if (catId == 0) {
+            products = productService.findAll();
+            categories = findAllCategories(products);
+        } else {
+            products = productService.filterByCategory(catId);
+            categories = findAllCategories(products);
+        }
         request.setAttribute("productList", products);
+//        request.setAttribute("productList", searchList);
         request.setAttribute("categories", categories);
         request.setAttribute("categories1", categories1);
         dispatcher.forward(request, response);

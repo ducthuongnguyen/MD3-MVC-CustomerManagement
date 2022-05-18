@@ -28,7 +28,7 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select* from products;")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from products;")) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -60,5 +60,23 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public void remove(int id) {
 
+    }
+
+    @Override
+    public List<Product> filterByCategory(int catId) {
+        List<Product> searchList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from products where categoryId =?;")) {
+            preparedStatement.setInt(1, catId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                searchList.add(new Product(id,name,price,catId));
+            }
+        } catch (SQLException e) {
+        }
+        return searchList;
     }
 }

@@ -207,13 +207,11 @@
             <!-- Price Start -->
             <div class="border-bottom mb-4 pb-4">
                 <h5 class="font-weight-semi-bold mb-4">Filter by category</h5>
-                    <c:forEach items="${categories1}" var="cat">
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <a href="products?action=filterCategory&id=${cat.id}">${cat.name}</a>
-                                <%--                        <label class="custom-control-label" for="price-all">${categories.get(i).name}</label>--%>
-                                <%--                        <span class="badge border font-weight-normal">1000</span>--%>
-                        </div>
-                    </c:forEach>
+                <c:forEach items="${categories1}" var="cat">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <a href="products?id=${cat.id}">${cat.name}</a>
+                    </div>
+                </c:forEach>
             </div>
             <!-- Price End -->
 
@@ -336,9 +334,6 @@
                                 <h6 class="text-truncate mb-3">${productList.get(i).name}</h6>
                                 <div class="d-flex justify-content-center">
                                     <h6>${categories.get(i).name}</h6>
-                                        <%--                                <h6 class="text-muted ml-2">--%>
-                                        <%--                                    <del>$123.00</del>--%>
-                                        <%--                                </h6>--%>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
