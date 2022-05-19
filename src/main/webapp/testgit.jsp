@@ -11,7 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-Thuong test
-hai test
+alo alo
 </body>
 </html>
