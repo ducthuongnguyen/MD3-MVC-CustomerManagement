@@ -29,10 +29,21 @@ public class ProductServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "view":
+                showDetail(request, response);
+                break;
             default:
                 showListProduct(request, response);
         }
 
+    }
+
+    private void showDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("product/detail.jsp");
+        List<Product> searchList = new ArrayList<>();
+        List<Product> products = productService.findAll();
+
+        dispatcher.forward(request, response);
     }
 
     private void filterByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,7 +79,7 @@ public class ProductServlet extends HttpServlet {
             categories = findAllCategories(products);
         }
         request.setAttribute("productList", products);
-//        request.setAttribute("productList", searchList);
+//        request.  setAttribute("productList", searchList);
         request.setAttribute("categories", categories);
         request.setAttribute("categories1", categories1);
         dispatcher.forward(request, response);
