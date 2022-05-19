@@ -11,10 +11,14 @@
     <title>Title</title>
 </head>
 <body>
+<<<<<<< HEAD
 Thuong test
 MINH cung test
 hai test
 minhhhhhhhhhhhhhhhhhhhhh
 
+=======
+manh mot dong
+>>>>>>> adab3d7794811be3c4ab95cec9d1d0c6306c7124
 </body>
 </html>
